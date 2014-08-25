@@ -1,0 +1,24 @@
+{
+  "name": "revisit-meatspac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "GPL3",
+  "dependencies": {
+    "body-parser": "^1.6.2",
+    "data-uri-to-buffer": "0.0.3",
+    "express": "^4.8.2",
+    "gm": "^1.16.0",
+    "nconf": "^0.6.9",
+    "socket.io-client": "~0.9.2",
+    "uuid": "^1.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.2.1"
+  }
+}
