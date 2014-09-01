@@ -9,9 +9,12 @@ var app = express()
 var uuid = require('uuid')
 var fingerprint = uuid.v4()
 nconf.argv().env().file({ file: 'local.json'})
+var threshold = nconf.get('threshold')
 var meatSpacUrl = nconf.get('url')
-
 var socket = io.connect(meatSpacUrl)
+// Rate limit flag.
+var available = true
+
 socket.on('connect', function() {
   console.log('connected to socket at: ' + meatSpacUrl)
 })
@@ -21,12 +24,14 @@ app.use(bodyParser.json({limit: '2mb'}))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(req, res) {
-  res.status(200).end()
+  if (available) {
+    res.status(200).end()
+  }
+  res.status(420).end()
 })
 
-var threshold = nconf.get('threshold')
-console.log(threshold)
 var addChat = throttle(function (image) {
+  available = true
   socket.emit('message', {
     apiKey: nconf.get('apiKey'),
     message: nconf.get('message'),
@@ -37,6 +42,7 @@ var addChat = throttle(function (image) {
 
 app.post('/service', function(req, res) {
   var imgBuff = dataUriToBuffer(req.body.content.data)
+  available = false
   gm(imgBuff).resize(135, 101).toBuffer('GIF', function(err, image) {
     if (err) {
       console.log(err)
