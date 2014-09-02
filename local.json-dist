@@ -3,5 +3,7 @@
     "apiKey": "",
     "url": "",
     "message": "",
-    "threshold": 3000
+    "rate": 1,
+    "burst": 3,
+    "window": 60000
 }

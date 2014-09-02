@@ -14,9 +14,9 @@
     "data-uri-to-buffer": "0.0.3",
     "express": "^4.8.2",
     "gm": "^1.16.0",
-    "lodash.throttle": "^2.4.1",
     "nconf": "^0.6.9",
     "socket.io-client": "~0.9.2",
+    "tokenthrottle": "^1.1.0",
     "uuid": "^1.4.1"
   },
   "devDependencies": {
