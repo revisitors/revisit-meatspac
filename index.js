@@ -24,6 +24,7 @@ app.use(bodyParser.json({limit: '2mb'}))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(req, res) {
+  console.log(available)
   if (available) {
     res.status(200).end()
   }
@@ -38,7 +39,7 @@ var addChat = throttle(function (image) {
     picture: 'data:image/gif;base64,' + image.toString('base64'),
     fingerPrint: fingerprint
   })
-}, threshold)
+}, threshold, false, false)
 
 app.post('/service', function(req, res) {
   var imgBuff = dataUriToBuffer(req.body.content.data)
