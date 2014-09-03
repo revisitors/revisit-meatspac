@@ -14,3 +14,8 @@ The API provides a single `/service` endpoint to POST an image to, which posts
 the image to meatspace and resonds with the image send in the request.
 
 By default the app runs on port 8000, this can be configred in local.json.
+
+Rate limiting is configured through local.json as well, with the following flags:
+- `rate` - how many messages are allowed through (on average) in the `window`
+- `burst` - the absolute maximum number of requests allowed through in `window`
+- `window` - the time period under which request throttling is refreshed (in milliseconds)
